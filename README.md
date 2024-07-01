@@ -18,3 +18,4 @@ What resources, tools, or coding practices did you use that might be helpful in 
 I utilized all module resources as well as github to help me with assignments. Insight from experienced developers on github was incredibly helpful.
 
 Employers sometimes ask for examples of work that you have successfully completed to show your skills, knowledge, and experience. What might you show future employers from this assignment?
+I can show my willingness to go above and beyond for security needs as well as my ability to evolve as a developer. 
