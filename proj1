@@ -1,0 +1,97 @@
+CS 305 Project One Template
+
+Document Revision History
+
+Version	Date	Author	Comments
+1.0	May 29th, 2024	Coral Stewart	
+
+Client
+
+ 
+
+Instructions
+Submit this completed vulnerability assessment report. Replace the bracketed text with the relevant information. In this report, identify your security vulnerability findings and recommend the next steps to remedy the issues you have found.
+
+•	Respond to the five steps outlined below and include your findings. 
+•	Respond using your own words. You may also include images or supporting materials. If you include them, make certain to insert them in the relevant locations in the document.
+•	Refer to the Project One Guidelines and Rubric for more detailed instructions about each section of the template.
+ 
+Developer
+Coral Stewart
+
+1. Interpreting Client Needs
+Determine your client’s needs and potential threats and attacks associated with the company’s application and software security requirements. Consider the following questions regarding how companies protect against external threats based on the scenario information:
+
+•	What is the value of secure communications to the company?
+•	Are there any international transactions that the company produces?
+•	Are there governmental restrictions on secure communications to consider?
+•	What external threats might be present now and in the immediate future?
+•	What modernization requirements must be considered, such as the role of open-source libraries and evolving web application technologies?
+
+Artemis Financial is a consulting company that is a client of the software engineering company Global Rain. Artemis Financial develops financial plans that are customized to fit the needs of their customers. These plans include retirement, insurance, savings and even investments. Financial information is highly sensitive and includes customer information like name, address, SSN, DOB, and tax information. Handling sensitive information requires secure communications and the best software security to ensure customers are protected from any risks or attacks. It is not entirely clear in the scenario whether or not the company works with clients globally, but it is stated that Global Rain offers its software services across the globe. The governments of these different countries may all have their own restrictions on secure communications, and it is important to look into this when taking on new clients. There are always threats to sensitive information, some relentless. It is imperative that Artemis Financial protects this information with encryption and ensure the software is running on the most recent version. Software that is regulated and maintainable ensures that it is always running on the current version and any bugs and flaws are fixed regularly. When it comes to sensitive information, regularly checking for bugs and finding ways to improve the software keeps the developers honest and the clients safe. 
+
+2. Areas of Security
+Refer to the vulnerability assessment process flow diagram. Identify which areas of security apply to Artemis Financial’s software application. Justify your reasoning for why each area is relevant to the software application.
+
+Input validation is a crucial step that will authenticate the credentials of the client, ensuring they are protected from any login attempts by attackers. String-based validation would work best in this situation. API’s also apply to this software because they allow data to be transferred between the different software programs and what data is allowed to be accessed. Applying cryptography to this software would protect clients from their information being accessed by others, allowing only them to see secure information and messages. Secure code error handling is extremely important to maintain the integrity of the code and identify vulnerabilities within the API. These errors can be fixed and the software will continue to protect sensitive information. Following coding best practices is a big part of code quality. Permissions should be defined in the code, allowing only the user accessing to see their information. Another aspect of code quality is its reliability. Will the code produce errors? Will the code include input validation? Is it maintainable? 
+
+3. Manual Review
+Continue working through the vulnerability assessment process flow diagram. Identify all vulnerabilities in the code base by manually inspecting the code.
+
+•	No input validation
+•	No cryptography
+•	No secure error handling
+•	User input exposed, POST method not used
+•	Code quality needs some work
+•	There is a lack of user authentication
+
+4. Static Testing
+Run a dependency check on Artemis Financial’s software application to identify all security vulnerabilities in the code. Record the output from the dependency-check report. Include the following items:
+
+•	The names or vulnerability codes of the known vulnerabilities
+•	A brief description and recommended solutions provided by the dependency-check report
+•	Any attribution that documents how this vulnerability has been identified or documented previously
+
+
+
+
+
+Dependency	Vulnerability	Description	Solution	Severity
+snakeyaml-1.25.jar	•	cpe:2.3:a:snakeyaml_project:snakeyaml:1.25:*:*:*:*:*:*:*	SnakeYaml's Constructor() class does not restrict types which can be instantiated during deserialization. Deserializing yaml content provided by an attacker can lead to remote code execution. We recommend using SnakeYaml's SafeConsturctor when parsing untrusted content to restrict deserialization	We recommend upgrading to version 2.0 and beyond.	CRITICAL
+spring-boot-2.2.4.RELEASE.jar	•	cpe:2.3:a:vmware:spring_boot:2.2.4:release:*:*:*:*:*:*	In Spring Boot versions 3.0.0 - 3.0.5, 2.7.0 - 2.7.10, and older unsupported versions, an application that is deployed to Cloud Foundry could be susceptible to a security bypass.	Users of affected versions should apply the following mitigation: 3.0.x users should upgrade to 3.0.6+. 2.7.x users should upgrade to 2.7.11+. Users of older, unsupported versions should upgrade to 3.0.6+ or 2.7.11+.	CRITICAL
+spring-boot-starter-web-2.2.4.RELEASE.jar	•	cpe:2.3:a:vmware:spring_boot:2.2.4:release:*:*:*:*:*:*
+•	cpe:2.3:a:web_project:web:2.2.4:release:*:*:*:*:*:*	In Spring Boot versions 3.0.0 - 3.0.6, 2.7.0 - 2.7.11, 2.6.0 - 2.6.14, 2.5.0 - 2.5.14 and older unsupported versions, there is potential for a denial-of-service (DoS) attack if Spring MVC is used together with a reverse proxy cache.	Update to newest version	CRITICAL
+spring-core-5.2.3.RELEASE.jar	•	cpe:2.3:a:pivotal_software:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:springsource:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:vmware:spring_framework:5.2.3:release:*:*:*:*:*:*	In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.	Update to newest version	CRITICAL
+spring-web-5.2.3.RELEASE.jar	•	cpe:2.3:a:pivotal_software:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:springsource:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:vmware:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:web_project:web:5.2.3:release:*:*:*:*:*:*	In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.	 Update to newest version	CRITICAL
+spring-webmvc-5.2.3.RELEASE.jar	•	cpe:2.3:a:pivotal_software:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:springsource:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:vmware:spring_framework:5.2.3:release:*:*:*:*:*:*
+•	cpe:2.3:a:web_project:web:5.2.3:release:*:*:*:*:*:*	In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, application with a STOMP over WebSocket endpoint is vulnerable to a denial of service attack by an authenticated user.	Update to newest version	CRITICAL
+tomcat-embed-core-9.0.30.jar	•	cpe:2.3:a:apache:tomcat:9.0.30:*:*:*:*:*:*:*
+•	cpe:2.3:a:apache_tomcat:apache_tomcat:9.0.30:*:*:*:*:*:*:*	Improper Input Validation vulnerability in Apache Tomcat.Tomcat from 11.0.0-M1 through 11.0.0-M10, from 10.1.0-M1 through 10.1.15, from 9.0.0-M1 through 9.0.82 and from 8.5.0 through 8.5.95 did not correctly parse HTTP trailer headers. A trailer header that exceeded the header size limit could cause Tomcat to treat a single request as multiple requests leading to the possibility of request smuggling when behind a reverse proxy.	Users are recommended to upgrade to version 11.0.0-M11 onwards, 10.1.16 onwards, 9.0.83 onwards or 8.5.96 onwards, which fix the issue.	CRITICAL
+tomcat-embed-websocket-9.0.30.jar	•	cpe:2.3:a:apache:tomcat:9.0.30:*:*:*:*:*:*:*
+•	cpe:2.3:a:apache_tomcat:apache_tomcat:9.0.30:*:*:*:*:*:*:*	Generation of Error Message Containing Sensitive Information vulnerability in Apache Tomcat.This issue affects Apache Tomcat: from 8.5.7 through 8.5.63, from 9.0.0-M11 through 9.0.43.	Users are recommended to upgrade to version 8.5.64 onwards or 9.0.44 onwards, which contain a fix for the issue.	CRITICAL
+bcprov-jdk15on-1.46.jar
+	•	cpe:2.3:a:bouncycastle:bouncy-castle-crypto-package:1.46:*:*:*:*:*:*:*
+•	cpe:2.3:a:bouncycastle:bouncy_castle_crypto_package:1.46:*:*:*:*:*:*:*
+•	cpe:2.3:a:bouncycastle:bouncy_castle_for_java:1.46:*:*:*:*:*:*:*
+•	cpe:2.3:a:bouncycastle:legion-of-the-bouncy-castle-java-crytography-api:1.46:*:*:*:*:*:*:*
+•	cpe:2.3:a:bouncycastle:the_bouncy_castle_crypto_package_for_java:1.46:*:*:*:*:*:*:*	Bouncy Castle for Java before 1.73 contains a potential Denial of Service (DoS) issue within the Bouncy Castle org.bouncycastle.openssl.PEMParser class. This class parses OpenSSL PEM encoded streams containing X.509 certificates, PKCS8 encoded keys, and PKCS7 objects. Parsing a file that has crafted ASN.1 data through the PEMParser causes an OutOfMemoryError, which can enable a denial of service attack. (For users of the FIPS Java API: BC-FJA 1.0.2.3 and earlier are affected; BC-FJA 1.0.2.4 is fixed.)	Update to newest version	HIGH
+jackson-databind-2.10.2.jar
+	•	cpe:2.3:a:fasterxml:jackson-databind:2.10.2:*:*:*:*:*:*:*
+•	cpe:2.3:a:fasterxml:jackson-modules-java8:2.10.2:*:*:*:*:*:*:*	jackson-databind 2.10.x through 2.12.x before 2.12.6 and 2.13.x before 2.13.1 allows attackers to cause a denial of service (2 GB transient heap usage per read) in uncommon situations involving JsonNode JDK serialization.	Update to newest version	HIGH
+logback-core-1.2.3.jar	•	cpe:2.3:a:qos:logback:1.2.3:*:*:*:*:*:*:*	A serialization vulnerability in logback receiver component part of logback version 1.4.11 allows an attacker to mount a Denial-Of-Service attack by sending poisoned data.	Update to newest version	HIGH
+hibernate-validator-6.0.18.Final.jar
+	•	cpe:2.3:a:redhat:hibernate_validator:6.0.18:*:*:*:*:*:*:*	A flaw was found in Hibernate Validator version 6.1.2.Final. A bug in the message interpolation processor enables invalid EL expressions to be evaluated as if they were valid. This flaw allows attackers to bypass input sanitation (escaping, stripping) controls that developers may have put in place when handling user-controlled data in error messages.	Update to newest version	MEDIUM
+log4j-api-2.12.1.jar	•	cpe:2.3:a:apache:log4j:2.12.1:*:*:*:*:*:*:*	Apache Log4j2 versions 2.0-beta7 through 2.17.0 (excluding security fix releases 2.3.2 and 2.12.4) are vulnerable to a remote code execution (RCE) attack when a configuration uses a JDBC Appender with a JNDI LDAP data source URI when an attacker has control of the target LDAP server.	This issue is fixed by limiting JNDI data source names to the java protocol in Log4j2 versions 2.17.1, 2.12.4, and 2.3.2.	LOW
+
+
+5. Mitigation Plan
+Interpret the results from the manual review and static testing report. Then identify the steps to mitigate the identified security vulnerabilities for Artemis Financial’s software application.
+
+I would suggest making updates to the newest version of bouncycastle, Apache tomcat, the hibernator validator, Snakeyaml, logback, Jackson-databind, Spring Boot and Spring framework. 
